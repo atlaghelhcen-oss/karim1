@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { legal } from '../legal';
+export function getStaticPaths() {
+  return Object.entries(legal).map(([slug, p]) => ({ params: { slug }, props: { p, slug } }));
+}
+const { p, slug } = Astro.props;
+---
+<Base title={`${p.title} | IPTV Smarters Pro France`} description={p.desc} path={`/${slug}`}>
+  <main class="wrap prose">
+    <h1>{p.title} – IPTV Smarters Pro France</h1>
+    {p.body.map((b) => <Fragment set:html={b} />)}
+  </main>
+</Base>

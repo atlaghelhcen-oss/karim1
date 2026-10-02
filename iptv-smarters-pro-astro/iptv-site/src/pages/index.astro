@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, PLANS } from '../site';
+const faq = [
+  ['Qu’est-ce qu’IPTV Smarters Pro ?', 'IPTV Smarters Pro est une application de lecture pour Smart TV, Android, iPhone et PC. Vous y saisissez votre code IPTV pour accéder à votre abonnement IPTV France en qualité jusqu’à la 4K.'],
+  ['Comment recevoir mon code IPTV ?', 'Votre code IPTV est livré par e-mail immédiatement après la commande. Pensez à vérifier vos courriers indésirables.'],
+  ['Quel abonnement choisir pour le meilleur IPTV ?', 'Le 12 mois à 49 € offre le meilleur équilibre prix et durée. Le 24 mois à 89 € est le plus économique au mois.'],
+  ['IPTV 4K : quelle connexion faut-il ?', 'Une connexion stable d’environ 25 Mb/s suffit pour l’IPTV 4K. En dessous, l’application choisit une qualité adaptée.'],
+  ['Puis-je être remboursé ?', 'Oui, la garantie satisfait ou remboursé s’applique pendant 30 jours. Écrivez à notre support français.'],
+  ['Le support est-il disponible le week-end ?', 'Oui, notre support français répond 24h/24 et 7j/7 par e-mail.'],
+];
+const reviews = [
+  ['Camille Durand', 'Code IPTV reçu en quelques minutes. L’installation dans IPTV Smarters Pro s’est faite sans aucune difficulté sur ma Smart TV.'],
+  ['Julien Moreau', 'Image 4K nette et guide des programmes clair. Pour moi, c’est le meilleur IPTV France testé jusqu’ici.'],
+  ['Sophie Lefèvre', 'J’ai posé une question un dimanche soir, la réponse est arrivée très vite. Support français vraiment réactif.'],
+  ['Thomas Girard', 'J’ai pris le 12 mois : bon rapport qualité prix et zapping fluide. Je recommande.'],
+  ['Léa Bertrand', 'Application simple, même pour mes parents. Le tuto d’activation du code IPTV est limpide.'],
+  ['Nicolas Roux', 'Abonnement IPTV 4K stable le soir comme en journée. Rien à redire.'],
+];
+const schema = [
+  { '@context': 'https://schema.org', '@type': 'Organization', name: SITE.name, url: SITE.url, email: SITE.email },
+  { '@context': 'https://schema.org', '@type': 'Product', name: 'Abonnement IPTV Smarters Pro France 4K', description: 'Code IPTV pour IPTV Smarters Pro, livré par e-mail.',
+    offers: PLANS.map((p) => ({ '@type': 'Offer', name: `Abonnement IPTV ${p.label}`, price: p.price, priceCurrency: 'EUR', availability: 'https://schema.org/InStock' })) },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+];
+const cats = ['IPTV 4K','Sport','Cinéma','Séries','Jeunesse','Documentaires','Code IPTV','Meilleur IPTV','IPTV France'];
+---
+<Base title="IPTV Smarters Pro : Meilleur IPTV France 4K | Code IPTV dès 29€" description="IPTV Smarters Pro : le meilleur IPTV France en 4K. Code IPTV livré par e-mail, support français 24/7, satisfait ou remboursé 30 jours. Dès 29 €." schema={schema}>
+<main>
+<section class="hero"><div class="wrap">
+  <div>
+    <h1>IPTV Smarters Pro : le meilleur IPTV France en 4K</h1>
+    <p class="lead">Recevez votre <a href="#tarifs">code IPTV</a> par e-mail, saisissez-le dans IPTV Smarters Pro et profitez de l’IPTV 4K sur tous vos écrans. Dès 29 €.</p>
+    <a class="btn" href="#tarifs">Choisir mon code IPTV</a>
+    <div class="chips"><span>Garantie 30 jours</span><span>Codes livrés par e-mail</span><span>Support français 24/7</span></div>
+  </div>
+  <img src="/iptv-smarters-pro-guide-4k.svg" width="640" height="520" alt="Guide des programmes IPTV Smarters Pro en IPTV 4K, meilleur IPTV France avec code IPTV" fetchpriority="high" />
+</div></section>
+
+<div class="ticker" aria-hidden="true"><div>{[...cats, ...cats].map((c) => <span>{c}</span>)}</div></div>
+
+<section><div class="wrap">
+  <h2>Pourquoi IPTV Smarters Pro pour votre IPTV France</h2>
+  <div class="feats">
+    <div class="feat"><h3>IPTV 4K fluide</h3><p>Une image nette pensée pour les grands écrans, avec le meilleur IPTV adapté à votre connexion.</p></div>
+    <div class="feat"><h3>Code IPTV instantané</h3><p>Votre code IPTV arrive par e-mail dès la commande, prêt à saisir dans l’application.</p></div>
+    <div class="feat"><h3>Support IPTV France 24/7</h3><p>Une équipe française vous répond à toute heure, week-ends compris.</p></div>
+  </div>
+</div></section>
+
+<section id="tarifs" style="background:#fff"><div class="wrap">
+  <h2>Code IPTV : abonnements IPTV France 4K pour IPTV Smarters Pro</h2>
+  <div class="plans">
+    {PLANS.map((p) => (
+      <div class:list={['plan', { best: p.best }]}>
+        <h3>Code IPTV {p.label}</h3>
+        <div class="price">{p.price}€</div><small>soit {p.per} € par mois</small>
+        <ul><li>IPTV 4K</li><li>Compatible IPTV Smarters Pro</li><li>Code livré par e-mail</li><li>Support français 24/7</li></ul>
+        <a class={p.best ? 'btn lemon' : 'btn'} href={SITE.checkout + encodeURIComponent(p.label)}>Commander {p.label}</a>
+      </div>
+    ))}
+  </div>
+  <p class="guarantee">Satisfait ou remboursé pendant 30 jours : votre abonnement IPTV France vous convient, ou nous vous remboursons. Voir la <a href="/politique-de-remboursement">politique de remboursement</a>.</p>
+</div></section>
+
+<section id="activation"><div class="wrap">
+  <h2>Activer votre code IPTV dans IPTV Smarters Pro en 3 étapes</h2>
+  <ol class="steps" style="padding:0">
+    <li><h3>Commandez votre code IPTV</h3><p>Choisissez votre durée parmi nos <a href="#tarifs">abonnements IPTV France</a>.</p></li>
+    <li><h3>Recevez-le par e-mail</h3><p>Vos identifiants IPTV 4K arrivent instantanément dans votre boîte de réception.</p></li>
+    <li><h3>Saisissez-le dans l’application</h3><p>Ouvrez IPTV Smarters Pro, entrez votre code IPTV, et lancez le meilleur IPTV sur votre écran.</p></li>
+  </ol>
+</div></section>
+
+<section class="seo"><div class="wrap">
+  <h2>Tout savoir sur IPTV Smarters Pro et le meilleur IPTV France</h2>
+  <div class="cols">
+    <h3>IPTV Smarters Pro : l’application de référence pour l’IPTV France</h3>
+    <p>IPTV Smarters Pro est une application de lecture réputée pour sa simplicité. Disponible sur Smart TV, Android, iPhone, iPad, Fire TV et ordinateur, elle regroupe votre abonnement IPTV France dans une seule interface : chaînes classées par catégorie, guide des programmes, replay selon l’offre, favoris et recherche rapide.</p>
+    <p>Pour l’utiliser, il suffit de saisir votre code IPTV reçu par e-mail. Aucune installation compliquée : l’application se charge, vous entrez vos identifiants, et votre liste apparaît. C’est pourquoi IPTV Smarters Pro reste le choix numéro un de ceux qui cherchent le meilleur IPTV sans configuration technique.</p>
+    <h3>IPTV 4K : une qualité d’image pensée pour votre écran</h3>
+    <p>L’IPTV 4K apporte plus de détails, des couleurs plus riches et un confort net sur les grands téléviseurs. Pour en profiter, comptez sur une connexion stable d’environ 25 Mb/s, de préférence en câble Ethernet ou en Wi-Fi 5 GHz. Si le débit baisse, l’application adapte la qualité pour garder une lecture fluide.</p>
+    <h3>Code IPTV : comment fonctionne votre abonnement IPTV France</h3>
+    <p>Votre <a href="#tarifs">code IPTV</a> est unique et livré par e-mail juste après votre commande. Nos formules vont de 3 mois à 24 mois, en paiement unique, sans renouvellement automatique. Le 12 mois à 49 € est le plus populaire ; le 24 mois à 89 € revient à environ 3,71 € par mois.</p>
+    <h3>Comment choisir le meilleur IPTV ?</h3>
+    <p>Un bon service IPTV se juge sur quatre critères : la stabilité de l’image, la simplicité d’activation du code IPTV, la clarté du guide des programmes et la qualité du support. Chez nous, le support est français, joignable 24h/24, et la garantie de 30 jours vous permet de décider en confiance.</p>
+    <p>Comparez les durées dans nos <a href="#tarifs">offres IPTV France</a>, suivez le <a href="#activation">guide d’installation d’IPTV Smarters Pro</a>, consultez les <a href="#avis">avis de nos clients</a> ou écrivez à notre <a href="/contact">support</a> pour toute question sur l’IPTV 4K.</p>
+    <h3>Compatibilité : IPTV Smarters Pro sur tous vos appareils</h3>
+    <p>Salon, chambre, déplacement : votre code IPTV fonctionne sur plusieurs appareils compatibles. Installez IPTV Smarters Pro depuis la boutique de votre appareil, connectez-vous une fois, et retrouvez votre IPTV France partout, avec la même interface claire.</p>
+  </div>
+</div></section>
+
+<section id="avis"><div class="wrap">
+  <h2>Avis clients : IPTV Smarters Pro, meilleur IPTV France</h2>
+  <div class="reviews">
+    {reviews.map(([n, t]) => <figure class="rev"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>{t}</blockquote><b>{n}</b></figure>)}
+  </div>
+</div></section>
+
+<section id="faq" style="background:#fff"><div class="wrap" style="max-width:820px">
+  <h2>FAQ IPTV Smarters Pro : code IPTV, IPTV 4K et IPTV France</h2>
+  {faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+  <p style="margin-top:20px">Une autre question ? Notre <a href="/contact">support français</a> vous répond 24/7.</p>
+</div></section>
+</main>
+</Base>

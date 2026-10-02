@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+---
+<Base title="Contact IPTV Smarters Pro France | Support code IPTV 24/7" description="Contactez le support français IPTV Smarters Pro : aide code IPTV, installation IPTV 4K, commande. Réponse 24h/24." path="/contact">
+  <main class="wrap prose">
+    <h1>Contact IPTV Smarters Pro France : support code IPTV 24/7</h1>
+    <p>Une question sur votre code IPTV, l’installation d’IPTV Smarters Pro ou votre abonnement IPTV 4K ? Écrivez-nous : notre équipe française répond à toute heure.</p>
+    <div class="mail">
+      <span>E-mail du support</span>
+      <code id="addr">{SITE.email}</code>
+      <button class="btn lemon" id="copy" type="button">Copier l’adresse</button>
+      <a class="btn" style="margin-left:10px;background:#ffffff1f" href={`mailto:${SITE.email}`}>Écrire un e-mail</a>
+      <p role="status" id="msg" style="margin-top:14px;min-height:1.6em"></p>
+    </div>
+    <p>Indiquez l’e-mail de votre commande pour une réponse plus rapide. Retrouvez aussi nos <a href="/#faq">réponses sur le meilleur IPTV France</a> et notre <a href="/politique-de-remboursement">garantie de 30 jours</a>.</p>
+  </main>
+  <script>
+    const b = document.getElementById('copy'), m = document.getElementById('msg'), a = document.getElementById('addr');
+    b?.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(a!.textContent!.trim()); m!.textContent = 'Adresse copiée'; }
+      catch { m!.textContent = 'Copie impossible : sélectionnez l’adresse manuellement.'; }
+    });
+  </script>
+</Base>
